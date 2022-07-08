@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1657306506 source:c:\users\jakub\documents\github\zad. 5\main.cpp
+	<iostream>
+	<stdio.h>
+	<limits>
+
+1657309174 source:c:\users\jakub\documents\github\zad-.5-psiz\main.cpp
+	<iostream>
+	<stdio.h>
+	<limits>
+
