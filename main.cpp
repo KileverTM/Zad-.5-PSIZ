@@ -11,11 +11,28 @@ using namespace std;
 struct File_header
 {
     char name[2];
-    unsigned int size;
-    unsigned short int reserved_1;
-    unsigned short int reserved_2;
-    unsigned int offset;
+     int size;
+     short int reserved_1;
+     short int reserved_2;
+     int offset;
 }file_header;
+
+
+struct Picture_header {
+     int headerSize;
+     int width;
+     int height;
+     short int planes;
+     short int bitPerPixel;
+     int compresion;
+     int imageSize;
+     int xPelsPerMeter;
+     int yPelsPerMeter;
+     int colorUsed;
+     int colorImportant;
+
+
+}picture_header;
 
 
 int main(int argc, char* argv[])
@@ -46,6 +63,23 @@ int main(int argc, char* argv[])
         cout << "Zarezerwowane 1: " << file_header.reserved_1 <<endl;
         cout << "Zarezerwowane 2: " << file_header.reserved_1 <<endl;
         cout << "Offset: " << file_header.offset <<endl;
+
+        fread(&picture_header, sizeof(struct Picture_header), 1, f);
+
+        cout << "Wielkosc naglowka informacyjnego: " << picture_header.headerSize <<endl;
+        cout << "Szerokosc obrazu: " << picture_header.width << "px"<<endl;;
+        cout << "Wysokosc obrazu: " << picture_header.height << " px"<<endl;;
+        cout << "Liczba warstw kolorow: " << picture_header.planes <<endl;
+        cout << "Liczba bitow na piksel: " << picture_header.bitPerPixel <<endl;
+        cout << "Algorytm kompresji: " << picture_header.compresion <<endl;
+        cout << "Rozmiar samego rysunku: " << picture_header.imageSize <<endl;
+        cout << "Rozdzielczosc pozioma: " << picture_header.xPelsPerMeter <<endl;
+        cout << "Rozdzielczosc pionowa: " << picture_header.yPelsPerMeter <<endl;
+        cout << "Liczba kolorow w palecie: " << picture_header.colorUsed <<endl;
+        cout << "Liczba waznych kolorow w palecie: " << picture_header.colorImportant <<endl;
+
+
+
 
 
 
