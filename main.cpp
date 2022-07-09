@@ -78,7 +78,37 @@ int main(int argc, char* argv[])
         cout << "Liczba kolorow w palecie: " << picture_header.colorUsed <<endl;
         cout << "Liczba waznych kolorow w palecie: " << picture_header.colorImportant <<endl;
 
+        FILE* n = fopen("Negativ.bmp", "wb");
+        if (nullptr == n) {
+            cout << endl << endl << "Problem z otwarciem pliku" << endl;
+        }
+        else {
+            cout << endl << endl << "Tworze negatyw obrazku" << endl;
 
+            fwrite(&file_header.name[0], 1, 1, n);
+            fwrite(&file_header.name[1], 1, 1, n);
+            fwrite(&file_header.size, sizeof(file_header.size), 1, n);
+            fwrite(&file_header.reserved_1, sizeof(file_header.reserved_1), 1, n);
+            fwrite(&file_header.reserved_2, sizeof(file_header.reserved_2), 1, n);
+            fwrite(&file_header.offset, sizeof(file_header.offset), 1, n);
+
+            fwrite(&picture_header, sizeof(struct Picture_header), 1, n);
+
+            int bmpImg;
+            for (int i = file_header.offset; i < file_header.size; i++)
+            {
+                fseek(f, i, SEEK_SET);
+                fseek(n, i, SEEK_SET);
+                fread(&bmpImg, 3, 1, f);
+                bmpImg = INT_MAX - bmpImg;
+                fwrite(&bmpImg, 3, 1, n);
+            }
+
+            cout << "Negatyw zostal utworzony";
+
+            fclose(f);
+            fclose(n);
+        }
 
 
 
